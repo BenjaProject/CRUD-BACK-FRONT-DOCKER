@@ -4,11 +4,11 @@ services:
 
   db:
     image: 'postgres:latest'
-    container_name: postgres
+    container_name: postgres-benjaminc
     build:
       context: ./postgres
     ports:
-      - "5432:5432"
+      - "5433:5432"
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=1234
@@ -20,7 +20,7 @@ services:
   
   backend:
     image: benjacv/backend:latest
-    container_name: backend
+    container_name: backend-benjaminc
     build:
       context: ./Test01/Test01
     
@@ -31,17 +31,17 @@ services:
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=1234
     depends_on:
-      - postgres
+      - db
 
   frontend:
     image: benjacv/frontend:latest
-    container_name: frontend
+    container_name: frontend-benjaminc
     build:
       context: ./test02 
     ports:
       - "8881:8881"
     depends_on:
-      - postgres
+      - db
 
 volumes:
   pg-data:
