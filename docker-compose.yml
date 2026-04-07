@@ -18,28 +18,28 @@ services:
       - pg-data:/var/lib/postgresql/data
 
   
-  backend:
-    image: benjacv/backend:latest
-    container_name: backend-benjaminc
+  backendbc:
+    image: benjacv/backendbc:latest
+    container_name: backendbc
     build:
       context: ./Test01/Test01
     
     ports:
-      - "9991:9991"
+      - "6789:6789"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/demo01
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/bus
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=1234
     depends_on:
       - db
 
-  frontend:
-    image: benjacv/frontend:latest
-    container_name: frontend-benjaminc
+  frontendbc:
+    image: benjacv/frontendbc:latest
+    container_name: frontendbc
     build:
       context: ./test02 
     ports:
-      - "8881:8881"
+      - "9876:9876"
     depends_on:
       - db
 
